@@ -13,6 +13,7 @@ import { ZodError } from "zod";
 
 import { auth } from "@/server/auth";
 import { db } from "@/server/db";
+import type { Session } from "next-auth";
 
 /**
  * 1. CONTEXT
@@ -35,6 +36,18 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 		...opts,
 	};
 };
+
+export function createContextInner(opts: {
+	session: Session | null;
+	db?: typeof db;
+}) {
+	const headers = new Headers();
+	return {
+		db: opts.db ?? db,
+		headers,
+		...opts,
+	};
+}
 
 /**
  * 2. INITIALIZATION
