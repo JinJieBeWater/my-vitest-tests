@@ -3,21 +3,21 @@ import { createCaller } from "@/server/api/root";
 import { createContextInner } from "@/server/api/trpc";
 import { db } from "@/server/db";
 
-export async function setupTrpc() {
+export function setupTrpc() {
 	const ctx = createContextInner({
 		session: null,
 		db,
 	});
 	const caller = createCaller(ctx);
 
-	return { caller, db };
+	return { caller, ctx };
 }
 
 interface SetupAuthorizedTrpcProps {
 	session?: Session;
 }
 
-export async function setupAuthorizedTrpc({
+export function setupAuthorizedTrpc({
 	session = {
 		user: { id: "1", name: "test" },
 		expires: new Date(Date.now() + 1000 * 60 * 60 * 24).toString(),
@@ -29,5 +29,5 @@ export async function setupAuthorizedTrpc({
 	});
 	const caller = createCaller(ctx);
 
-	return { callerAuthorized: caller, db };
+	return { callerAuthorized: caller, ctx };
 }
