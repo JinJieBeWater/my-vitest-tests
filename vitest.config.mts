@@ -5,6 +5,7 @@ nextEnv.loadEnvConfig(process.cwd());
 
 export default defineConfig({
 	test: {
+		setupFiles: ["./src/test/setup.ts"],
 		server: {
 			deps: {
 				inline: ["next"],
