@@ -38,17 +38,16 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 };
 
 export function createContextInner(opts: {
-	session: Session | null;
-	db?: typeof db;
+  session: Session | null
+  db: typeof db
 }) {
-	const headers = new Headers();
-	return {
-		db: opts.db ?? db,
-		session: opts.session,
-		headers,
-	};
+  const headers = new Headers()
+  return {
+    db: opts.db,
+    session: opts.session,
+    headers,
+  }
 }
-
 /**
  * 2. INITIALIZATION
  *
