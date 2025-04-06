@@ -19,8 +19,8 @@ describe("post router", async () => {
 
 	it("returns the secret message if logged in", async () => {
 		const { callerAuthorized } = await setupAuthorizedTrpc();
-		const example = await callerAuthorized.post.getSecretMessage();
-		expect(example).toMatchInlineSnapshot(
+		const result = await callerAuthorized.post.getSecretMessage();
+		expect(result).toMatchInlineSnapshot(
 			`"you can now see this secret message!"`,
 		);
 	});
